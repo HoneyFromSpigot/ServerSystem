@@ -1,6 +1,6 @@
 name: System
 version: '${project.version}'
-main: de.webcode.system.System
+main: de.webcode.system.ServerSystem
 api-version: 1.19
 authors: [ TheWebcode ]
 description: Server System
