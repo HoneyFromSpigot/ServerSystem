@@ -1,0 +1,5 @@
+{
+  "prefix": "&8[&e&lSYSTEM&8] ",
+  "error.command.no_permission": "&cDu hast keine Berechtigung um diesen Command auszuführen!",
+  "error.command.no_player": "&cDu musst diesen Command als Spieler ausführen!"
+}
