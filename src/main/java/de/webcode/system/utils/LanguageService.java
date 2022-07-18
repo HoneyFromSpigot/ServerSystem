@@ -39,10 +39,14 @@ public class LanguageService {
         }
     }
 
-    public String getMessageWithPrefix(String key){
-        return getMessage("prefix") + getMessage(key);
-    }
     public String getMessage(String key){
         return ChatColor.translateAlternateColorCodes('&', this.jsonObject.get(key).getAsString());
+    }
+
+    public static String getMessageWithPrefix(String key){
+        LanguageService languageService = ServerSystem.getInstance().getLanguageService();
+
+        String s = languageService.getMessage("prefix") + languageService.getMessage(key);
+        return ChatColor.translateAlternateColorCodes('&', s);
     }
 }

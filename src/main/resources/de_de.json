@@ -1,5 +1,9 @@
 {
   "prefix": "&8[&e&lSYSTEM&8] ",
   "error.command.no_permission": "&cDu hast keine Berechtigung um diesen Command auszuführen!",
-  "error.command.no_player": "&cDu musst diesen Command als Spieler ausführen!"
+  "error.command.no_player": "&cDu musst diesen Command als Spieler ausführen!",
+  "error.command.target_player_not_found": "&6{player} &cwurde nicht gefunden!",
+  "command.warn.usage": "&cBitte benutze &6/warn <Spieler> <Grund> &coder &6/warn reset <Spieler>",
+  "command.warn.warn_player_success_sender": "&aDer Spieler &6{player} &awurde zum &6{i}-mal &awegen &6{reason}&averwarnt",
+  "command.warn.warn_player_success_player": "&cDu wurdest wegen&6{reason}&azum &6{i}-mal &averwarnt!"
 }
