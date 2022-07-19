@@ -41,6 +41,11 @@ public class WarnCommand implements CommandExecutor {
 
         Player target = Bukkit.getPlayer(args[0]);
 
+        if(target == sender){
+            sender.sendMessage(LanguageService.getMessageWithPrefix("command.warn.self_warn"));
+            return false;
+        }
+
         if(target == null){
             sender.sendMessage(LanguageService.getMessageWithPrefix("error.command.target_player_not_found").replace("{player}", args[0]));
             return false;

@@ -7,6 +7,7 @@
   "command.warn.warn_player_success_sender": "&aDer Spieler &6{player} &awurde zum &6{i}-mal &awegen &6{reason}&averwarnt",
   "command.warn.warn_player_success_player": "&cDu wurdest wegen&6{reason}&azum &6{i}-mal &averwarnt!",
   "command.warn.reset_success": "&aDie Warnings von &6{player} &awurden zurückgesetzt!",
+  "command.warn.self_warn": "&cDu kannst dich nicht selbst verwarnen!",
   "command.warn.player_banned": "&6{player} &awurde gebannt, da er bereits 3 mal verwarnt wurde!",
   "command.warns.usage": "&cBitte benutze &6/warns <Spieler>"
 }

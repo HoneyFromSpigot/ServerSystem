@@ -13,6 +13,11 @@ import org.jetbrains.annotations.NotNull;
 public class WarnListCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+
+        if(!sender.hasPermission("system.warn")){
+            sender.sendMessage(LanguageService.getMessageWithPrefix("error.command.no_permission"));
+            return false;
+        }
         if(!(sender instanceof Player)){
             sender.sendMessage(LanguageService.getMessageWithPrefix("error.command.no_player"));
             return false;
