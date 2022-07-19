@@ -1,6 +1,7 @@
 package de.webcode.system;
 
 import de.webcode.system.commands.GamemodeCommand;
+import de.webcode.system.commands.SKickCommand;
 import de.webcode.system.commands.WarnCommand;
 import de.webcode.system.commands.WarnListCommand;
 import de.webcode.system.event.Eventlistener;
@@ -45,6 +46,7 @@ public final class ServerSystem extends JavaPlugin {
     }
 
     private void registerCommands(){
+        getCommand("skick").setExecutor(new SKickCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("warns").setExecutor(new WarnListCommand());
         getCommand("warn").setExecutor(new WarnCommand());

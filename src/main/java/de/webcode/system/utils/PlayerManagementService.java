@@ -81,6 +81,14 @@ public class PlayerManagementService {
         player.kickPlayer(reason);
     }
 
+    public void kickPlayer(Player player, String reason){
+        player.kickPlayer("\n\n" +
+                "§8----------------------------------------\n" +
+                "§c§§lDu wurdest aus folgendem Grund vom Server gekickt:\n\n" +
+                reason +
+                "\n\n" +
+                "§8----------------------------------------");
+    }
     public static PlayerManagementService getService(){
         return ServerSystem.getInstance().getPlayerManagementService();
     }
