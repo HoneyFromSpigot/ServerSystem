@@ -1,6 +1,8 @@
 package de.webcode.system.commands;
 
+import de.webcode.system.ServerSystem;
 import de.webcode.system.utils.LanguageService;
+import de.webcode.system.utils.inventory.anvilgui.AnvilGUI;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -15,7 +17,6 @@ import java.util.Arrays;
 public class GamemodeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-
         if(!sender.hasPermission("system.gamemode")){
             sender.sendMessage(LanguageService.getMessageWithPrefix("error.command.no_permission"));
             return false;
