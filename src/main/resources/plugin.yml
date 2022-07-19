@@ -7,3 +7,9 @@ description: Server System
 commands:
   warn:
   warns:
+  gm:
+    aliases:
+      - gmc
+      - gms
+      - gma
+      - gmspec

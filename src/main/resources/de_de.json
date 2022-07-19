@@ -9,5 +9,6 @@
   "command.warn.reset_success": "&aDie Warnings von &6{player} &awurden zurückgesetzt!",
   "command.warn.self_warn": "&cDu kannst dich nicht selbst verwarnen!",
   "command.warn.player_banned": "&6{player} &awurde gebannt, da er bereits 3 mal verwarnt wurde!",
-  "command.warns.usage": "&cBitte benutze &6/warns <Spieler>"
+  "command.warns.usage": "&cBitte benutze &6/warns <Spieler>",
+  "command.gamemode.usage": "&cBitte benutze &6/gamemode <0, 1, 2, 3> &coder die Shortcuts: &6/gmc&c,&6/gms&c,&6/gma&c,&6/gmspec"
 }
