@@ -2,6 +2,7 @@ package de.webcode.system.commands;
 
 import de.webcode.system.utils.LanguageService;
 import net.kyori.adventure.text.Component;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,25 +37,48 @@ public class GamemodeCommand implements CommandExecutor {
 
         if(Arrays.asList("gmc", "gma", "gms", "gmspec").contains(label)) return true;
 
-        if(args.length != 1){
-            player.sendMessage(LanguageService.getMessageWithPrefix("command.gamemode.usage"));
-            return false;
-        }
+        if(args.length == 1){
+            try{
+                int i = Integer.parseInt(args[0]);
 
-        try{
-            int i = Integer.parseInt(args[0]);
+                if(i < 0 || i > 3){
+                    player.sendMessage(LanguageService.getMessageWithPrefix("command.gamemode.usage"));
+                    return false;
+                }
 
-            if(i < 0 || i > 3){
+                setGameMode(player, GameMode.getByValue(i));
+            } catch (NumberFormatException e){
+                player.sendMessage(LanguageService.getMessageWithPrefix("command.gamemode.usage"));
+                return false;
+            }
+        }else if(args.length == 2){
+            Player target = Bukkit.getPlayer(args[0]);
+
+            if(target == null){
+                player.sendMessage(LanguageService.getMessageWithPrefix("error.command.target_player_not_found"));
+                return false;
+            }
+
+            try{
+                int i = Integer.parseInt(args[1]);
+                GameMode byValue = GameMode.getByValue(i);
+                setGameMode(target, byValue);
+
+                switch(byValue){
+                    case CREATIVE -> player.sendActionBar(Component.text("§8>> " + "§6" + target.getName() + " ist nun im §eKreativ-Modus"));
+                    case SURVIVAL -> player.sendActionBar(Component.text("§8>> " + "§6" + target.getName() + " ist nun im §eÜberlebens-Modus"));
+                    case ADVENTURE -> player.sendActionBar(Component.text("§8>> "+ "§6" + target.getName() +" ist nun im §eAbenteuer-Modus"));
+                    case SPECTATOR -> player.sendActionBar(Component.text("§8>> "+ "§6" + target.getName() +" ist nun im §eZuschauer-Modus"));
+                }
+            } catch (NumberFormatException e){
                 player.sendMessage(LanguageService.getMessageWithPrefix("command.gamemode.usage"));
                 return false;
             }
 
-            setGameMode(player, GameMode.getByValue(i));
-        } catch (NumberFormatException e){
-            player.sendMessage(LanguageService.getMessageWithPrefix("command.gamemode.usage"));
-            return false;
+            return true;
         }
 
+        player.sendMessage(LanguageService.getMessageWithPrefix("command.gamemode.usage"));
         return false;
     }
 
