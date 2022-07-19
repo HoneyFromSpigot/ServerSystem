@@ -70,7 +70,14 @@ public class PlayerManagementService {
     }
 
     public void banPlayer(Player player, String reason){
-        player.banPlayer(reason);
+        player.banPlayer("\n\n" +
+                "§8----------------------------------------\n" +
+                "§c§lGebannt\n" +
+                "§7Du wurdest wegen folgendem Grund vom Server gebannt: \n\n" +
+                reason +
+                "\n\n" +
+                "§7Für eine Entbannung wende dich bitte an die Administratoren des Servers.\n" +
+                "§8----------------------------------------");
         player.kickPlayer(reason);
     }
 

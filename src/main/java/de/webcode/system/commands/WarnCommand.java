@@ -3,14 +3,20 @@ package de.webcode.system.commands;
 import de.webcode.system.ServerSystem;
 import de.webcode.system.utils.LanguageService;
 import de.webcode.system.utils.PlayerManagementService;
+import de.webcode.system.utils.file.FileService;
 import de.webcode.system.utils.reporting.Warning;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class WarnCommand implements CommandExecutor {
     @Override
@@ -41,10 +47,13 @@ public class WarnCommand implements CommandExecutor {
 
         Player target = Bukkit.getPlayer(args[0]);
 
+        /*
         if(target == sender){
             sender.sendMessage(LanguageService.getMessageWithPrefix("command.warn.self_warn"));
             return false;
         }
+
+         */
 
         if(target == null){
             sender.sendMessage(LanguageService.getMessageWithPrefix("error.command.target_player_not_found").replace("{player}", args[0]));
@@ -70,6 +79,16 @@ public class WarnCommand implements CommandExecutor {
         if(warningcount == 3){
             PlayerManagementService.getService().banPlayer(target, reason);
             sender.sendMessage(LanguageService.getMessageWithPrefix("command.warn.player_banned"));
+            FileService fileService = ServerSystem.getInstance().getFileService();
+            YamlConfiguration playerData = fileService.getPlayerData();
+            String pName = target.getName();
+            DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+
+            playerData.set(pName + ".warning.banned.mod", ((Player) sender).getName());
+            playerData.set(pName + ".warning.banned.date", dateFormat.format(date));
+            playerData.set(pName + ".warning.banned.reason", reason);
+            fileService.saveFiles();
             return true;
         }
 
@@ -77,9 +96,14 @@ public class WarnCommand implements CommandExecutor {
         PlayerManagementService.getService().addWarning(target, warning);
 
         String message = LanguageService.getMessageWithPrefix("command.warn.warn_player_success_sender").replace("{player}", target.getName()).replace("{i}", "" + (warningcount + 1)).replace("{reason}", reason);
-        String playerMessage = LanguageService.getMessageWithPrefix("command.warn.warn_player_success_player").replace("{reason}", reason).replace("{i}", 1 + warningcount + "");
         sender.sendMessage(message);
-        target.sendMessage(playerMessage);
+        target.kickPlayer(
+                "§8----------------------------------------\n" +
+                        "§c§lVerwarnung\n\n" +
+                        reason +
+                        "\n\n§7Dies ist deine " + (warningcount + 1) + " Verwarnung. Nach 3 Verwarnungen wirst du gebannt." +
+                        "\n§8----------------------------------------"
+        );
 
         return true;
     }

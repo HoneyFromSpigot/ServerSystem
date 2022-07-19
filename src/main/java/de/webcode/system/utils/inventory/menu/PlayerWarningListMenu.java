@@ -1,11 +1,13 @@
 package de.webcode.system.utils.inventory.menu;
 
+import de.webcode.system.ServerSystem;
 import de.webcode.system.utils.LanguageService;
 import de.webcode.system.utils.PlayerManagementService;
 import de.webcode.system.utils.inventory.Menu;
 import de.webcode.system.utils.inventory.menuutility.TargetPlayerMenuUtility;
 import de.webcode.system.utils.reporting.Warning;
 import org.bukkit.Material;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
@@ -25,7 +27,7 @@ public class PlayerWarningListMenu extends Menu {
 
     @Override
     public int getSlots() {
-        return 54;
+        return 27;
     }
 
     @Override
@@ -50,18 +52,18 @@ public class PlayerWarningListMenu extends Menu {
             }
         }
 
+        inventory.setItem(10, super.FILLER_GLASS);
+        inventory.setItem(16, super.FILLER_GLASS);
         inventory.setItem(17, super.FILLER_GLASS);
-        inventory.setItem(18, super.FILLER_GLASS);
-        inventory.setItem(26, super.FILLER_GLASS);
-        inventory.setItem(27, super.FILLER_GLASS);
-        inventory.setItem(35, super.FILLER_GLASS);
-        inventory.setItem(36, super.FILLER_GLASS);
 
-        for (int i = 44; i < 54; i++) {
+        for (int i = 18; i < 27; i++) {
             if (inventory.getItem(i) == null) {
                 inventory.setItem(i, super.FILLER_GLASS);
             }
         }
+
+        inventory.setItem(17, super.FILLER_GLASS);
+
 
         if(warnings == null) return;
 
@@ -96,8 +98,32 @@ public class PlayerWarningListMenu extends Menu {
             inventory.addItem(itemStack);
         }
 
+
+        YamlConfiguration playerData = ServerSystem.getInstance().getFileService().getPlayerData();
+        String pName = target.getName();
+
+        if(playerData.isSet(pName + ".warning.banned")){
+            ItemStack itemStack = new ItemStack(Material.PAPER);
+            ItemMeta itemMeta = itemStack.getItemMeta();
+
+            itemMeta.setDisplayName("§c§lGebannt");
+
+            ArrayList<String> lore = new ArrayList<>();
+            lore.add("\n");
+            lore.add("§7Spieler wurde automatisch nach der 3 Warnung gebannt");
+            lore.add("\n");
+            lore.add("§7Datum der Verwarnung: §6" + playerData.getString(pName + ".warning.banned.date"));
+            lore.add("§7Verwarnt von: §6" + playerData.getString(pName + ".warning.banned.mod"));
+            lore.add("§7Verwarnt wegen:\n");
+            lore.add("§7" + playerData.getString(pName + ".warning.banned.reason"));
+
+            itemMeta.setLore(lore);
+            itemStack.setItemMeta(itemMeta);
+            inventory.addItem(itemStack);
+        }
+
         ItemStack clearWarnings = makeItem(Material.BARRIER, "§aAlle Verwarnungen löschen", "\n", "§7Alle Verwarnungen für §6" + target.getName() + " §alöschen");
 
-        inventory.setItem(49, clearWarnings);
+        inventory.setItem(15, clearWarnings);
     }
 }
