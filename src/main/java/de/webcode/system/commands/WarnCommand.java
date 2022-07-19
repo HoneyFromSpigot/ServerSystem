@@ -5,6 +5,7 @@ import de.webcode.system.utils.LanguageService;
 import de.webcode.system.utils.PlayerManagementService;
 import de.webcode.system.utils.reporting.Warning;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,7 +26,16 @@ public class WarnCommand implements CommandExecutor {
         }
 
         if(args[0].equalsIgnoreCase("reset")){
-            //TODO: Reset Warnings
+            Player target = Bukkit.getPlayer(args[1]);
+
+            if(target == null){
+                sender.sendMessage(LanguageService.getMessageWithPrefix("error.command.target_player_not_found").replace("{player}", args[1]));
+                return false;
+            }
+
+            PlayerManagementService.getService().resetWarnings(target);
+
+            sender.sendMessage(LanguageService.getMessageWithPrefix("command.warn.reset_success").replace("{player}", target.getName()));
             return true;
         }
 
@@ -49,18 +59,19 @@ public class WarnCommand implements CommandExecutor {
             sb.append(s + " ");
         }
 
-        String reason = sb.toString();
+        String reason = ChatColor.translateAlternateColorCodes('&', sb.toString());
         int warningcount = PlayerManagementService.getService().getWarningCount(target);
 
         if(warningcount == 3){
-            //TODO: Ban Player
-            return false;
+            PlayerManagementService.getService().banPlayer(target, reason);
+            sender.sendMessage(LanguageService.getMessageWithPrefix("command.warn.player_banned"));
+            return true;
         }
 
-        Warning warning = new Warning(target, (Player) sender, reason);
+        Warning warning = new Warning(target, ((Player) sender).getName(), reason);
         PlayerManagementService.getService().addWarning(target, warning);
 
-        String message = LanguageService.getMessageWithPrefix("command.warn.warn_player_success_sender").replace("{player}", target.getName()).replace("{i}", "" + warningcount + 1).replace("{reason}", reason);
+        String message = LanguageService.getMessageWithPrefix("command.warn.warn_player_success_sender").replace("{player}", target.getName()).replace("{i}", "" + (warningcount + 1)).replace("{reason}", reason);
         String playerMessage = LanguageService.getMessageWithPrefix("command.warn.warn_player_success_player").replace("{reason}", reason).replace("{i}", 1 + warningcount + "");
         sender.sendMessage(message);
         target.sendMessage(playerMessage);

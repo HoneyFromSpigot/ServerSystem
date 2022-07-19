@@ -6,3 +6,4 @@ authors: [ TheWebcode ]
 description: Server System
 commands:
   warn:
+  warns:

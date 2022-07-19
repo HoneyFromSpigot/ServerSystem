@@ -1,6 +1,7 @@
 package de.webcode.system;
 
 import de.webcode.system.commands.WarnCommand;
+import de.webcode.system.commands.WarnListCommand;
 import de.webcode.system.event.Eventlistener;
 import de.webcode.system.utils.LanguageService;
 import de.webcode.system.utils.PlayerManagementService;
@@ -43,6 +44,7 @@ public final class ServerSystem extends JavaPlugin {
     }
 
     private void registerCommands(){
+        getCommand("warns").setExecutor(new WarnListCommand());
         getCommand("warn").setExecutor(new WarnCommand());
     }
 

@@ -17,12 +17,22 @@ public class PlayerManagementService {
         this.playerData = fileService.getPlayerData();
     }
 
+    public void resetWarnings(Player player){
+        String pName = player.getName();
+
+        playerData.set(pName + ".warning", null);
+        fileService.saveFiles();
+
+        playerData.set(pName + ".warning.count", 0);
+        fileService.saveFiles();
+    }
+
     public void addWarning(Player player, Warning warning){
         String pName = player.getName();
         int count = getWarningCount(player) + 1;
 
         playerData.set(pName + ".warning.count", count);
-        playerData.set(pName + ".warning." + count + ".mod", warning.getMod().getName());
+        playerData.set(pName + ".warning." + count + ".mod", warning.getMod());
         playerData.set(pName + ".warning." + count + ".date", warning.getDate());
         playerData.set(pName + ".warning." + count + ".reason", warning.getReason());
 
@@ -36,7 +46,18 @@ public class PlayerManagementService {
 
         String pName = player.getName();
 
-        return null;
+        ArrayList<Warning> warnings = new ArrayList<>();
+
+        for(int i = 1; i < warningCount + 1; i++){
+            String mod = playerData.getString(pName + ".warning." + i + ".mod");
+            String date = playerData.getString(pName + ".warning." + i + ".date");
+            String reason = playerData.getString(pName + ".warning." + i + ".reason");
+
+            Warning w = new Warning(player, mod, reason, date);
+            warnings.add(w);
+        }
+
+        return warnings;
     }
 
     public int getWarningCount(Player player){
@@ -46,6 +67,11 @@ public class PlayerManagementService {
         }
 
         return 0;
+    }
+
+    public void banPlayer(Player player, String reason){
+        player.banPlayer(reason);
+        player.kickPlayer(reason);
     }
 
     public static PlayerManagementService getService(){
