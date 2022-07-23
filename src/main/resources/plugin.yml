@@ -20,3 +20,6 @@ commands:
   bc:
     aliases:
       - broadcast
+  chatsel:
+    aliases:
+      - chatselection

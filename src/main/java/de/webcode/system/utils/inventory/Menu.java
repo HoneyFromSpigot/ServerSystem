@@ -2,6 +2,7 @@ package de.webcode.system.utils.inventory;
 
 import de.webcode.system.utils.inventory.menuutility.PlayerMenuUtility;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -45,6 +46,27 @@ public abstract class Menu implements InventoryHolder {
     public void setFillerGlass(){
         for (int i = 0; i < getSlots(); i++) {
             if (inventory.getItem(i) == null){
+                inventory.setItem(i, FILLER_GLASS);
+            }
+        }
+    }
+
+    public void addMenuBorder(){
+        for (int i = 0; i < 10; i++) {
+            if (inventory.getItem(i) == null) {
+                inventory.setItem(i, FILLER_GLASS);
+            }
+        }
+
+        inventory.setItem(17, FILLER_GLASS);
+        inventory.setItem(18, FILLER_GLASS);
+        inventory.setItem(26, FILLER_GLASS);
+        inventory.setItem(27, FILLER_GLASS);
+        inventory.setItem(35, FILLER_GLASS);
+        inventory.setItem(36, FILLER_GLASS);
+
+        for (int i = 44; i < 54; i++) {
+            if (inventory.getItem(i) == null) {
                 inventory.setItem(i, FILLER_GLASS);
             }
         }
