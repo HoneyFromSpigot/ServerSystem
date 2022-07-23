@@ -17,5 +17,6 @@
   "command.teamchat.toggle_on": "&aDu bist nun im &6Teamchat",
   "command.teamchat.toggle_off": "&aDu bist nun im &6Standart Chat",
   "command.broadcast.usage": "&cBitte benutze &6/bc <Nachricht>",
-  "command.chatsel.selection_successfull": "&aDu bist nun im &e{chat_name}"
+  "command.chatsel.selection_successfull": "&aDu bist nun im &e{chat_name}",
+  "command.clearchat.success": "&aDu hast den Chat erfolgreich gecleart!"
 }

@@ -23,3 +23,6 @@ commands:
   chatsel:
     aliases:
       - chatselection
+  clearchat:
+    aliases:
+      - cc

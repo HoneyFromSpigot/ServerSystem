@@ -51,6 +51,7 @@ public final class ServerSystem extends JavaPlugin {
     }
 
     private void registerCommands(){
+        getCommand("clearchat").setExecutor(new ClearChatCommand());
         getCommand("chatsel").setExecutor(new ChatSelCommand());
         getCommand("bc").setExecutor(new BroadcastCommand());
         getCommand("tc").setExecutor(new TeamChatCommand());
