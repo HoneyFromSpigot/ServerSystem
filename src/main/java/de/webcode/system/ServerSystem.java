@@ -5,6 +5,7 @@ import de.webcode.system.event.Eventlistener;
 import de.webcode.system.utils.LanguageService;
 import de.webcode.system.utils.PlayerManagementService;
 import de.webcode.system.utils.chat.ChatService;
+import de.webcode.system.utils.chat.ChatType;
 import de.webcode.system.utils.file.FileService;
 import de.webcode.system.utils.inventory.InventoryService;
 import org.apache.commons.io.FileUtils;
@@ -37,6 +38,10 @@ public final class ServerSystem extends JavaPlugin {
 
         registerCommands();
         registerEvents();
+
+        Bukkit.getOnlinePlayers().forEach(player -> {
+            ChatService.getService().setPlayerChatType(player, ChatType.STANDART);
+        });
     }
 
     private void registerEvents(){
@@ -46,6 +51,7 @@ public final class ServerSystem extends JavaPlugin {
     }
 
     private void registerCommands(){
+        getCommand("bc").setExecutor(new BroadcastCommand());
         getCommand("tc").setExecutor(new TeamChatCommand());
         getCommand("skick").setExecutor(new SKickCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());

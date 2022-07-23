@@ -29,7 +29,7 @@ public class ChatService {
 
         playerChatTypes.keySet().forEach(player -> {
             if(type == getPlayerChatType(player) || type.getVisibleChats().contains(getPlayerChatType(player)) || player.hasPermission(type.getChatPermission())){
-                TextComponent prefix = Component.text(chatMessage.getType().getChatPrefix() + "<" + chatMessage.getSender().getName() + "> ");
+                TextComponent prefix = Component.text(chatMessage.getType().getChatPrefix() + (chatMessage.getSender() == null ? "" : "<" + chatMessage.getSender().getName() + "> "));
                 player.sendMessage(prefix.append(chatMessage.getMessage()));
             }
         });

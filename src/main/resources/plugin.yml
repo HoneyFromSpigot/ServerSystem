@@ -15,3 +15,8 @@ commands:
       - gmspec
   skick:
   tc:
+    aliases:
+      - teamchat
+  bc:
+    aliases:
+      - broadcast

@@ -7,7 +7,8 @@ import java.util.List;
 public enum ChatType {
     ADMIN("§8[§c§lADMIN-CHAT§8] ", "system.chat.admin", new ArrayList<>()),
     SERVER_TEAM("§8[§9SERVERTEAM-CHAT§8] §f","system.chat.team", Arrays.asList(ChatType.ADMIN)),
-    STANDART("","system.chat.standart", Arrays.asList(ChatType.ADMIN, ChatType.SERVER_TEAM));
+    STANDART("","system.chat.standart", Arrays.asList(ChatType.ADMIN, ChatType.SERVER_TEAM)),
+    BROADCAST("§8[§aServer-Ruf§8] §f", "system.chat.standart", Arrays.asList(ChatType.STANDART, ChatType.SERVER_TEAM, ChatType.ADMIN));
 
     private List<ChatType> visibleChats;
     private String chatPermission;

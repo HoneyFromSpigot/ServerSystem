@@ -15,5 +15,6 @@
   "command.skick.player_kick_success": "&aDer Spieler wurde gekickt.",
   "command.teamchat.usage": "&cBitte benutze &6/tc <an|aus>",
   "command.teamchat.toggle_on": "&aDu bist nun im &6Teamchat",
-  "command.teamchat.toggle_off": "&aDu bist nun im &6Standart Chat"
+  "command.teamchat.toggle_off": "&aDu bist nun im &6Standart Chat",
+  "command.broadcast.usage": "&cBitte benutze &6/bc <Nachricht>"
 }

@@ -21,6 +21,10 @@ public class ChatMessage {
         this.type = type;
     }
 
+    public void handle(){
+        ChatService.getService().handleMessage(this);
+    }
+
     public Component getMessage() {
         return message;
     }
