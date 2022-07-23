@@ -1,12 +1,10 @@
 package de.webcode.system;
 
-import de.webcode.system.commands.GamemodeCommand;
-import de.webcode.system.commands.SKickCommand;
-import de.webcode.system.commands.WarnCommand;
-import de.webcode.system.commands.WarnListCommand;
+import de.webcode.system.commands.*;
 import de.webcode.system.event.Eventlistener;
 import de.webcode.system.utils.LanguageService;
 import de.webcode.system.utils.PlayerManagementService;
+import de.webcode.system.utils.chat.ChatService;
 import de.webcode.system.utils.file.FileService;
 import de.webcode.system.utils.inventory.InventoryService;
 import org.apache.commons.io.FileUtils;
@@ -25,6 +23,7 @@ public final class ServerSystem extends JavaPlugin {
     private LanguageService languageService;
     private InventoryService inventoryService;
     private PlayerManagementService playerManagementService;
+    private ChatService chatService;
 
     @Override
     public void onEnable() {
@@ -34,6 +33,7 @@ public final class ServerSystem extends JavaPlugin {
         this.languageService = new LanguageService("de_de.json");
         this.inventoryService = new InventoryService();
         this.playerManagementService = new PlayerManagementService();
+        this.chatService = new ChatService();
 
         registerCommands();
         registerEvents();
@@ -46,10 +46,15 @@ public final class ServerSystem extends JavaPlugin {
     }
 
     private void registerCommands(){
+        getCommand("tc").setExecutor(new TeamChatCommand());
         getCommand("skick").setExecutor(new SKickCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("warns").setExecutor(new WarnListCommand());
         getCommand("warn").setExecutor(new WarnCommand());
+    }
+
+    public ChatService getChatService() {
+        return chatService;
     }
 
     public FileService getFileService() {

@@ -12,5 +12,8 @@
   "command.warns.usage": "&cBitte benutze &6/warns <Spieler>",
   "command.gamemode.usage": "&cBitte benutze &6/gamemode <0, 1, 2, 3> &coder die Shortcuts: &6/gmc&c,&6/gms&c,&6/gma&c,&6/gmspec &coder &6/gm <Spieler> <0, 1, 2, 3>",
   "command.skick.usage": "&cBitte benutze &6/skick <Spieler> <Grund> &coder &6/skick <Spieler>",
-  "command.skick.player_kick_success": "&aDer Spieler wurde gekickt."
+  "command.skick.player_kick_success": "&aDer Spieler wurde gekickt.",
+  "command.teamchat.usage": "&cBitte benutze &6/tc <an|aus>",
+  "command.teamchat.toggle_on": "&aDu bist nun im &6Teamchat",
+  "command.teamchat.toggle_off": "&aDu bist nun im &6Standart Chat"
 }
