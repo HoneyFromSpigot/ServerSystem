@@ -40,6 +40,12 @@ public class Eventlistener implements Listener {
     @EventHandler
     public void onChatMessage(AsyncChatEvent event){
         Player player = event.getPlayer();
+
+        if (ChatService.getService().isGlobalMute() && !player.isOp()) {
+            player.sendMessage("§cZurzeit kannst du keine Nachrichten senden!");
+            event.setCancelled(true);
+            return;
+        }
         ChatMessage message = new ChatMessage(event.message(), event.getPlayer(), ChatService.getService().getPlayerChatType(player));
         ChatService.getService().handleMessage(message);
         event.setCancelled(true);

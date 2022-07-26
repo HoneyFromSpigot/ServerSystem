@@ -26,3 +26,5 @@ commands:
   clearchat:
     aliases:
       - cc
+  report:
+  globalmute:

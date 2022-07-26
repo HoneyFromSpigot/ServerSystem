@@ -51,6 +51,8 @@ public final class ServerSystem extends JavaPlugin {
     }
 
     private void registerCommands(){
+        getCommand("globalmute").setExecutor(new GlobalMuteCommand());
+        getCommand("report").setExecutor(new ReportCommand());
         getCommand("clearchat").setExecutor(new ClearChatCommand());
         getCommand("chatsel").setExecutor(new ChatSelCommand());
         getCommand("bc").setExecutor(new BroadcastCommand());
